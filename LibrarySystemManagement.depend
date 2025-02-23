@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1740340663 source:c:\users\cs\documents\++c\.vscode\librarysystemmanagement\main.cpp
+	<iostream>
+	"header.h"
+
+1740338698 source:c:\users\cs\documents\++c\.vscode\librarysystemmanagement\source.cpp
+	<iostream>
+	"header.h"
+
+1740340503 c:\users\cs\documents\++c\.vscode\librarysystemmanagement\header.h
+	<iostream>
+
