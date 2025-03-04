@@ -203,13 +203,15 @@ void addBook()
                 break;
             }
         }
+
         myLibrary[book_id].authorName = authorName;
         myLibrary[book_id].bookName = bookName;
         myLibrary[book_id].bookPrice = bookPrice;
-        myLibrary[book_id].bookId = res.second;
+        myLibrary[book_id].bookId = book_id;
         myLibrary[book_id].totalCopies+=copies_number;
         cout<<"\n"<<bookName<<" book is entered successfully at shelf "
             <<book_id+1<<" of your Library.\n and currently, existing total copies is "<<myLibrary[book_id].totalCopies<<".\n\n";
+
     }
     else
     {
@@ -225,7 +227,7 @@ void displayBooks()
     {
 
         if(book.bookId == -1)
-            cout<<"Empty Place\n\n";
+            cout<<"Empty Self\n\n";
         else
         {
             bookDetails(book.bookId);
@@ -240,7 +242,6 @@ void editBook()
     double bookPrice;
     bool editNow = false;
     int id;
-    string name;
     cout<<"To edit book , you must enter book's shelf number or book name.\nWhat do you want to use?\n";
     cout<<"1) Book's shelf number.\n2) Book name.\n\n";
     cout<<"Enter number of your answer: ";
@@ -261,7 +262,7 @@ void editBook()
         cin.ignore();
         getline(cin,bookName);
         cout<<"\n";
-        editNow = checkBookName(id,name);
+        editNow = checkBookName(id,bookName);
     }
 
     if(editNow)
@@ -354,14 +355,16 @@ void deleteBook(){
     string name;
     int id;
     cout<<"Enter book name: ";
-    cin>>name;cout<<"\n";
+    cin.ignore();
+    getline(cin,name);
+    cout<<"\n";
     if(checkBookName(id,name)){
 
         name = myLibrary[id].bookName;
         myLibrary[id].authorName = "";
         myLibrary[id].bookName = "";
         myLibrary[id].bookPrice = 0.0;
-        myLibrary[id].bookId = 0;
+        myLibrary[id].bookId = -1;
         myLibrary[id].totalCopies = 0;
         myLibrary[id].borrowedCopies = 0;
 
@@ -374,7 +377,10 @@ void borrowBook(){
 
     int id;
     cout<<"Enter book name: ";
-    string name; cin>>name;cout<<"\n";
+    string name;
+    cin.ignore();
+    getline(cin,name);
+    cout<<"\n";
     if(checkBookName(id,name)){
 
         cout<<"The borrowing process was successful. Currently, borrowed copies of this book is "
@@ -385,7 +391,9 @@ void restoreBook(){
 
     string name;
     cout<<"Enter book name: ";
-    cin>>name;cout<<"\n";
+    cin.ignore();
+    getline(cin,name);
+    cout<<"\n";
     for(const auto& book:myLibrary){
 
         if(book.bookName == name)
